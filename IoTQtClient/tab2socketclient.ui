@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>770</width>
-    <height>538</height>
+    <width>554</width>
+    <height>345</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -52,13 +52,13 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="1,2,1">
      <item>
-      <widget class="QLineEdit" name="lineEdit_2"/>
+      <widget class="QLineEdit" name="pLErecvId"/>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit"/>
+      <widget class="QLineEdit" name="pLEsendData"/>
      </item>
      <item>
-      <widget class="QPushButton" name="pPBsendData">
+      <widget class="QPushButton" name="pPBsendButton">
        <property name="text">
         <string>Send</string>
        </property>

@@ -3,6 +3,9 @@
 
 #include <QWidget>
 #include "socketclient.h"
+#include <QTime>
+#include <QDebug>
+#include <QMessageBox>
 namespace Ui {
 class Tab2SocketClient;
 }
@@ -21,8 +24,16 @@ private:
 private slots:
     void slotSocketConnectToServer(bool);
     void slotSocketRecvUpdate(QString);
+    void slotSocketSendData();
+    void slotSocketSendData(QString);
+    void slotSocketRecvToss(QString);
+    //void slotSocketDataClear();
 signals:
     void sigSocketRecv(QString);
+    void sigTab3RecvData(QString);
+    void sigTab4RecvData(QString);
+
+
 
 };
 

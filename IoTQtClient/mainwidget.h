@@ -3,21 +3,25 @@
 
 #include <QWidget>
 #include "tab2socketclient.h"
+#include "tab3controlpannel.h"
+#include "tab4sensordisplay.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWidget; }
 QT_END_NAMESPACE
-
+    
 class MainWidget : public QWidget
 {
     Q_OBJECT
 
 public:
-    MainWidget(QWidget *parent = nullptr);
-    ~MainWidget();
+    MainWidget(QWidget *parent = nullptr); // Constructor default parameter
+    ~MainWidget(); // Destructor
 
 private:
-    Ui::MainWidget *ui;
+    Ui::MainWidget *ui; // MainWidget * ui;
     Tab2SocketClient* pTab2SocketClient;
+    Tab3ControlPannel* pTab3ControlPannel;
+    Tab4SensorDisplay* pTab4SensorDisplay;
 };
 #endif // MAINWIDGET_H
