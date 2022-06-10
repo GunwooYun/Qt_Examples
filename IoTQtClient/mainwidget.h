@@ -5,6 +5,7 @@
 #include "tab2socketclient.h"
 #include "tab3controlpannel.h"
 #include "tab4sensordisplay.h"
+#include "tab5chartplot.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWidget; }
@@ -23,5 +24,6 @@ private:
     Tab2SocketClient* pTab2SocketClient;
     Tab3ControlPannel* pTab3ControlPannel;
     Tab4SensorDisplay* pTab4SensorDisplay;
+    Tab5ChartPlot * pTab5ChartPlot;
 };
 #endif // MAINWIDGET_H

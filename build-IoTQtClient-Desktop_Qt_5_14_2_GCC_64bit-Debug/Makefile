@@ -14,10 +14,10 @@ EQ            = =
 
 CC            = gcc
 CXX           = g++
-DEFINES       = -DQT_DEPRECATED_WARNINGS -DQT_QML_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB
+DEFINES       = -DQT_DEPRECATED_WARNINGS -DQT_QML_DEBUG -DQT_CHARTS_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -g -Wall -Wextra -D_REENTRANT -fPIC $(DEFINES)
 CXXFLAGS      = -pipe -g -std=gnu++11 -Wall -Wextra -D_REENTRANT -fPIC $(DEFINES)
-INCPATH       = -I../IoTQtClient -I. -I../../5.14.2/gcc_64/include -I../../5.14.2/gcc_64/include/QtWidgets -I../../5.14.2/gcc_64/include/QtGui -I../../5.14.2/gcc_64/include/QtNetwork -I../../5.14.2/gcc_64/include/QtCore -I. -isystem /usr/include/libdrm -I. -I../../5.14.2/gcc_64/mkspecs/linux-g++
+INCPATH       = -I../IoTQtClient -I. -I../../5.14.2/gcc_64/include -I../../5.14.2/gcc_64/include/QtCharts -I../../5.14.2/gcc_64/include/QtWidgets -I../../5.14.2/gcc_64/include/QtGui -I../../5.14.2/gcc_64/include/QtNetwork -I../../5.14.2/gcc_64/include/QtCore -I. -isystem /usr/include/libdrm -I. -I../../5.14.2/gcc_64/mkspecs/linux-g++
 QMAKE         = /home/ubuntu/Qt5.14.2/5.14.2/gcc_64/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -40,7 +40,7 @@ DISTNAME      = IoTQtClient1.0.0
 DISTDIR = /home/ubuntu/Qt5.14.2/Qt_Examples/build-IoTQtClient-Desktop_Qt_5_14_2_GCC_64bit-Debug/.tmp/IoTQtClient1.0.0
 LINK          = g++
 LFLAGS        = -Wl,-rpath,/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/lib
-LIBS          = $(SUBLIBS) /home/ubuntu/Qt5.14.2/5.14.2/gcc_64/lib/libQt5Widgets.so /home/ubuntu/Qt5.14.2/5.14.2/gcc_64/lib/libQt5Gui.so /home/ubuntu/Qt5.14.2/5.14.2/gcc_64/lib/libQt5Network.so /home/ubuntu/Qt5.14.2/5.14.2/gcc_64/lib/libQt5Core.so -lGL -lpthread   
+LIBS          = $(SUBLIBS) /home/ubuntu/Qt5.14.2/5.14.2/gcc_64/lib/libQt5Charts.so /home/ubuntu/Qt5.14.2/5.14.2/gcc_64/lib/libQt5Widgets.so /home/ubuntu/Qt5.14.2/5.14.2/gcc_64/lib/libQt5Gui.so /home/ubuntu/Qt5.14.2/5.14.2/gcc_64/lib/libQt5Network.so /home/ubuntu/Qt5.14.2/5.14.2/gcc_64/lib/libQt5Core.so -lGL -lpthread   
 AR            = ar cqs
 RANLIB        = 
 SED           = sed
@@ -57,24 +57,28 @@ SOURCES       = ../IoTQtClient/main.cpp \
 		../IoTQtClient/socketclient.cpp \
 		../IoTQtClient/tab2socketclient.cpp \
 		../IoTQtClient/tab3controlpannel.cpp \
-		../IoTQtClient/tab4sensordisplay.cpp qrc_IoTQtClient.cpp \
+		../IoTQtClient/tab4sensordisplay.cpp \
+		../IoTQtClient/tab5chartplot.cpp qrc_IoTQtClient.cpp \
 		moc_mainwidget.cpp \
 		moc_socketclient.cpp \
 		moc_tab2socketclient.cpp \
 		moc_tab3controlpannel.cpp \
-		moc_tab4sensordisplay.cpp
+		moc_tab4sensordisplay.cpp \
+		moc_tab5chartplot.cpp
 OBJECTS       = main.o \
 		mainwidget.o \
 		socketclient.o \
 		tab2socketclient.o \
 		tab3controlpannel.o \
 		tab4sensordisplay.o \
+		tab5chartplot.o \
 		qrc_IoTQtClient.o \
 		moc_mainwidget.o \
 		moc_socketclient.o \
 		moc_tab2socketclient.o \
 		moc_tab3controlpannel.o \
-		moc_tab4sensordisplay.o
+		moc_tab4sensordisplay.o \
+		moc_tab5chartplot.o
 DIST          = ../../5.14.2/gcc_64/mkspecs/features/spec_pre.prf \
 		../../5.14.2/gcc_64/mkspecs/common/unix.conf \
 		../../5.14.2/gcc_64/mkspecs/common/linux.conf \
@@ -290,12 +294,14 @@ DIST          = ../../5.14.2/gcc_64/mkspecs/features/spec_pre.prf \
 		../IoTQtClient/socketclient.h \
 		../IoTQtClient/tab2socketclient.h \
 		../IoTQtClient/tab3controlpannel.h \
-		../IoTQtClient/tab4sensordisplay.h ../IoTQtClient/main.cpp \
+		../IoTQtClient/tab4sensordisplay.h \
+		../IoTQtClient/tab5chartplot.h ../IoTQtClient/main.cpp \
 		../IoTQtClient/mainwidget.cpp \
 		../IoTQtClient/socketclient.cpp \
 		../IoTQtClient/tab2socketclient.cpp \
 		../IoTQtClient/tab3controlpannel.cpp \
-		../IoTQtClient/tab4sensordisplay.cpp
+		../IoTQtClient/tab4sensordisplay.cpp \
+		../IoTQtClient/tab5chartplot.cpp
 QMAKE_TARGET  = IoTQtClient
 DESTDIR       = 
 TARGET        = IoTQtClient
@@ -304,7 +310,7 @@ TARGET        = IoTQtClient
 first: all
 ####### Build rules
 
-IoTQtClient: ui_mainwidget.h ui_tab2socketclient.h ui_tab3controlpannel.h ui_tab4sensordisplay.h $(OBJECTS)  
+IoTQtClient: ui_mainwidget.h ui_tab2socketclient.h ui_tab3controlpannel.h ui_tab4sensordisplay.h ui_tab5chartplot.h $(OBJECTS)  
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
 Makefile: ../IoTQtClient/IoTQtClient.pro ../../5.14.2/gcc_64/mkspecs/linux-g++/qmake.conf ../../5.14.2/gcc_64/mkspecs/features/spec_pre.prf \
@@ -750,9 +756,9 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../IoTQtClient/IoTQtClient.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents ../../5.14.2/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../IoTQtClient/mainwidget.h ../IoTQtClient/socketclient.h ../IoTQtClient/tab2socketclient.h ../IoTQtClient/tab3controlpannel.h ../IoTQtClient/tab4sensordisplay.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../IoTQtClient/main.cpp ../IoTQtClient/mainwidget.cpp ../IoTQtClient/socketclient.cpp ../IoTQtClient/tab2socketclient.cpp ../IoTQtClient/tab3controlpannel.cpp ../IoTQtClient/tab4sensordisplay.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../IoTQtClient/mainwidget.ui ../IoTQtClient/tab2socketclient.ui ../IoTQtClient/tab3controlpannel.ui ../IoTQtClient/tab4sensordisplay.ui $(DISTDIR)/
+	$(COPY_FILE) --parents ../IoTQtClient/mainwidget.h ../IoTQtClient/socketclient.h ../IoTQtClient/tab2socketclient.h ../IoTQtClient/tab3controlpannel.h ../IoTQtClient/tab4sensordisplay.h ../IoTQtClient/tab5chartplot.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../IoTQtClient/main.cpp ../IoTQtClient/mainwidget.cpp ../IoTQtClient/socketclient.cpp ../IoTQtClient/tab2socketclient.cpp ../IoTQtClient/tab3controlpannel.cpp ../IoTQtClient/tab4sensordisplay.cpp ../IoTQtClient/tab5chartplot.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../IoTQtClient/mainwidget.ui ../IoTQtClient/tab2socketclient.ui ../IoTQtClient/tab3controlpannel.ui ../IoTQtClient/tab4sensordisplay.ui ../IoTQtClient/tab5chartplot.ui $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -795,9 +801,9 @@ compiler_moc_predefs_clean:
 moc_predefs.h: ../../5.14.2/gcc_64/mkspecs/features/data/dummy.cpp
 	g++ -pipe -g -std=gnu++11 -Wall -Wextra -dM -E -o moc_predefs.h ../../5.14.2/gcc_64/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_mainwidget.cpp moc_socketclient.cpp moc_tab2socketclient.cpp moc_tab3controlpannel.cpp moc_tab4sensordisplay.cpp
+compiler_moc_header_make_all: moc_mainwidget.cpp moc_socketclient.cpp moc_tab2socketclient.cpp moc_tab3controlpannel.cpp moc_tab4sensordisplay.cpp moc_tab5chartplot.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_mainwidget.cpp moc_socketclient.cpp moc_tab2socketclient.cpp moc_tab3controlpannel.cpp moc_tab4sensordisplay.cpp
+	-$(DEL_FILE) moc_mainwidget.cpp moc_socketclient.cpp moc_tab2socketclient.cpp moc_tab3controlpannel.cpp moc_tab4sensordisplay.cpp moc_tab5chartplot.cpp
 moc_mainwidget.cpp: ../IoTQtClient/mainwidget.h \
 		../../5.14.2/gcc_64/include/QtWidgets/QWidget \
 		../../5.14.2/gcc_64/include/QtWidgets/qwidget.h \
@@ -928,9 +934,43 @@ moc_mainwidget.cpp: ../IoTQtClient/mainwidget.h \
 		../../5.14.2/gcc_64/include/QtCore/QDebug \
 		../IoTQtClient/tab3controlpannel.h \
 		../IoTQtClient/tab4sensordisplay.h \
+		../IoTQtClient/tab5chartplot.h \
+		../../5.14.2/gcc_64/include/QtCharts/QChartView \
+		../../5.14.2/gcc_64/include/QtCharts/qchartview.h \
+		../../5.14.2/gcc_64/include/QtCharts/QAbstractAxis \
+		../../5.14.2/gcc_64/include/QtCharts/qabstractaxis.h \
+		../../5.14.2/gcc_64/include/QtCharts/QChartGlobal \
+		../../5.14.2/gcc_64/include/QtCharts/qchartglobal.h \
+		../../5.14.2/gcc_64/include/QtCore/QtGlobal \
+		../../5.14.2/gcc_64/include/QtGui/QPen \
+		../../5.14.2/gcc_64/include/QtGui/QFont \
+		../../5.14.2/gcc_64/include/QtCore/QVariant \
+		../../5.14.2/gcc_64/include/QtCharts/QAbstractSeries \
+		../../5.14.2/gcc_64/include/QtCharts/qabstractseries.h \
+		../../5.14.2/gcc_64/include/QtCore/QObject \
+		../../5.14.2/gcc_64/include/QtCharts/QChart \
+		../../5.14.2/gcc_64/include/QtCharts/qchart.h \
+		../../5.14.2/gcc_64/include/QtCharts/QLegend \
+		../../5.14.2/gcc_64/include/QtCharts/qlegend.h \
+		../../5.14.2/gcc_64/include/QtWidgets/QGraphicsWidget \
+		../../5.14.2/gcc_64/include/QtWidgets/qgraphicswidget.h \
+		../../5.14.2/gcc_64/include/QtWidgets/qgraphicslayoutitem.h \
+		../../5.14.2/gcc_64/include/QtWidgets/qgraphicsitem.h \
+		../../5.14.2/gcc_64/include/QtGui/QBrush \
+		../../5.14.2/gcc_64/include/QtCore/QMargins \
+		../../5.14.2/gcc_64/include/QtWidgets/QGraphicsView \
+		../../5.14.2/gcc_64/include/QtWidgets/qgraphicsview.h \
+		../../5.14.2/gcc_64/include/QtGui/qpainter.h \
+		../../5.14.2/gcc_64/include/QtWidgets/qscrollarea.h \
+		../../5.14.2/gcc_64/include/QtWidgets/qabstractscrollarea.h \
+		../../5.14.2/gcc_64/include/QtWidgets/qgraphicsscene.h \
+		../../5.14.2/gcc_64/include/QtCharts/QLineSeries \
+		../../5.14.2/gcc_64/include/QtCharts/qlineseries.h \
+		../../5.14.2/gcc_64/include/QtCharts/QXYSeries \
+		../../5.14.2/gcc_64/include/QtCharts/qxyseries.h \
 		moc_predefs.h \
 		../../5.14.2/gcc_64/bin/moc
-	/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/bin/moc $(DEFINES) --include /home/ubuntu/Qt5.14.2/Qt_Examples/build-IoTQtClient-Desktop_Qt_5_14_2_GCC_64bit-Debug/moc_predefs.h -I/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/mkspecs/linux-g++ -I/home/ubuntu/Qt5.14.2/Qt_Examples/IoTQtClient -I/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/include -I/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets -I/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/include/QtGui -I/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/include/QtNetwork -I/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/include/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../IoTQtClient/mainwidget.h -o moc_mainwidget.cpp
+	/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/bin/moc $(DEFINES) --include /home/ubuntu/Qt5.14.2/Qt_Examples/build-IoTQtClient-Desktop_Qt_5_14_2_GCC_64bit-Debug/moc_predefs.h -I/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/mkspecs/linux-g++ -I/home/ubuntu/Qt5.14.2/Qt_Examples/IoTQtClient -I/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/include -I/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/include/QtCharts -I/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets -I/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/include/QtGui -I/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/include/QtNetwork -I/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/include/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../IoTQtClient/mainwidget.h -o moc_mainwidget.cpp
 
 moc_socketclient.cpp: ../IoTQtClient/socketclient.h \
 		../../5.14.2/gcc_64/include/QtNetwork/QTcpSocket \
@@ -1056,7 +1096,7 @@ moc_socketclient.cpp: ../IoTQtClient/socketclient.h \
 		../../5.14.2/gcc_64/include/QtWidgets/qmessagebox.h \
 		moc_predefs.h \
 		../../5.14.2/gcc_64/bin/moc
-	/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/bin/moc $(DEFINES) --include /home/ubuntu/Qt5.14.2/Qt_Examples/build-IoTQtClient-Desktop_Qt_5_14_2_GCC_64bit-Debug/moc_predefs.h -I/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/mkspecs/linux-g++ -I/home/ubuntu/Qt5.14.2/Qt_Examples/IoTQtClient -I/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/include -I/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets -I/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/include/QtGui -I/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/include/QtNetwork -I/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/include/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../IoTQtClient/socketclient.h -o moc_socketclient.cpp
+	/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/bin/moc $(DEFINES) --include /home/ubuntu/Qt5.14.2/Qt_Examples/build-IoTQtClient-Desktop_Qt_5_14_2_GCC_64bit-Debug/moc_predefs.h -I/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/mkspecs/linux-g++ -I/home/ubuntu/Qt5.14.2/Qt_Examples/IoTQtClient -I/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/include -I/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/include/QtCharts -I/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets -I/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/include/QtGui -I/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/include/QtNetwork -I/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/include/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../IoTQtClient/socketclient.h -o moc_socketclient.cpp
 
 moc_tab2socketclient.cpp: ../IoTQtClient/tab2socketclient.h \
 		../../5.14.2/gcc_64/include/QtWidgets/QWidget \
@@ -1187,7 +1227,7 @@ moc_tab2socketclient.cpp: ../IoTQtClient/tab2socketclient.h \
 		../../5.14.2/gcc_64/include/QtCore/QDebug \
 		moc_predefs.h \
 		../../5.14.2/gcc_64/bin/moc
-	/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/bin/moc $(DEFINES) --include /home/ubuntu/Qt5.14.2/Qt_Examples/build-IoTQtClient-Desktop_Qt_5_14_2_GCC_64bit-Debug/moc_predefs.h -I/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/mkspecs/linux-g++ -I/home/ubuntu/Qt5.14.2/Qt_Examples/IoTQtClient -I/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/include -I/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets -I/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/include/QtGui -I/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/include/QtNetwork -I/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/include/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../IoTQtClient/tab2socketclient.h -o moc_tab2socketclient.cpp
+	/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/bin/moc $(DEFINES) --include /home/ubuntu/Qt5.14.2/Qt_Examples/build-IoTQtClient-Desktop_Qt_5_14_2_GCC_64bit-Debug/moc_predefs.h -I/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/mkspecs/linux-g++ -I/home/ubuntu/Qt5.14.2/Qt_Examples/IoTQtClient -I/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/include -I/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/include/QtCharts -I/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets -I/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/include/QtGui -I/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/include/QtNetwork -I/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/include/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../IoTQtClient/tab2socketclient.h -o moc_tab2socketclient.cpp
 
 moc_tab3controlpannel.cpp: ../IoTQtClient/tab3controlpannel.h \
 		../../5.14.2/gcc_64/include/QtWidgets/QWidget \
@@ -1297,9 +1337,10 @@ moc_tab3controlpannel.cpp: ../IoTQtClient/tab3controlpannel.h \
 		../../5.14.2/gcc_64/include/QtWidgets/QMessageBox \
 		../../5.14.2/gcc_64/include/QtWidgets/qmessagebox.h \
 		../../5.14.2/gcc_64/include/QtWidgets/qdialog.h \
+		../../5.14.2/gcc_64/include/QtCore/QDebug \
 		moc_predefs.h \
 		../../5.14.2/gcc_64/bin/moc
-	/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/bin/moc $(DEFINES) --include /home/ubuntu/Qt5.14.2/Qt_Examples/build-IoTQtClient-Desktop_Qt_5_14_2_GCC_64bit-Debug/moc_predefs.h -I/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/mkspecs/linux-g++ -I/home/ubuntu/Qt5.14.2/Qt_Examples/IoTQtClient -I/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/include -I/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets -I/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/include/QtGui -I/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/include/QtNetwork -I/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/include/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../IoTQtClient/tab3controlpannel.h -o moc_tab3controlpannel.cpp
+	/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/bin/moc $(DEFINES) --include /home/ubuntu/Qt5.14.2/Qt_Examples/build-IoTQtClient-Desktop_Qt_5_14_2_GCC_64bit-Debug/moc_predefs.h -I/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/mkspecs/linux-g++ -I/home/ubuntu/Qt5.14.2/Qt_Examples/IoTQtClient -I/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/include -I/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/include/QtCharts -I/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets -I/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/include/QtGui -I/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/include/QtNetwork -I/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/include/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../IoTQtClient/tab3controlpannel.h -o moc_tab3controlpannel.cpp
 
 moc_tab4sensordisplay.cpp: ../IoTQtClient/tab4sensordisplay.h \
 		../../5.14.2/gcc_64/include/QtWidgets/QWidget \
@@ -1406,17 +1447,182 @@ moc_tab4sensordisplay.cpp: ../IoTQtClient/tab4sensordisplay.h \
 		../../5.14.2/gcc_64/include/QtCore/qfiledevice.h \
 		../../5.14.2/gcc_64/include/QtGui/qvector2d.h \
 		../../5.14.2/gcc_64/include/QtGui/qtouchdevice.h \
+		../../5.14.2/gcc_64/include/QtCore/QDebug \
+		../IoTQtClient/socketclient.h \
+		../../5.14.2/gcc_64/include/QtNetwork/QTcpSocket \
+		../../5.14.2/gcc_64/include/QtNetwork/qtcpsocket.h \
+		../../5.14.2/gcc_64/include/QtNetwork/qtnetworkglobal.h \
+		../../5.14.2/gcc_64/include/QtNetwork/qtnetwork-config.h \
+		../../5.14.2/gcc_64/include/QtNetwork/qabstractsocket.h \
+		../../5.14.2/gcc_64/include/QtNetwork/QHostAddress \
+		../../5.14.2/gcc_64/include/QtNetwork/qhostaddress.h \
+		../../5.14.2/gcc_64/include/QtWidgets/QInputDialog \
+		../../5.14.2/gcc_64/include/QtWidgets/qinputdialog.h \
+		../../5.14.2/gcc_64/include/QtWidgets/qlineedit.h \
+		../../5.14.2/gcc_64/include/QtWidgets/qframe.h \
+		../../5.14.2/gcc_64/include/QtGui/qtextcursor.h \
+		../../5.14.2/gcc_64/include/QtGui/qtextformat.h \
+		../../5.14.2/gcc_64/include/QtGui/qpen.h \
+		../../5.14.2/gcc_64/include/QtGui/qtextoption.h \
+		../../5.14.2/gcc_64/include/QtWidgets/qdialog.h \
+		../../5.14.2/gcc_64/include/QtWidgets/QMessageBox \
+		../../5.14.2/gcc_64/include/QtWidgets/qmessagebox.h \
 		moc_predefs.h \
 		../../5.14.2/gcc_64/bin/moc
-	/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/bin/moc $(DEFINES) --include /home/ubuntu/Qt5.14.2/Qt_Examples/build-IoTQtClient-Desktop_Qt_5_14_2_GCC_64bit-Debug/moc_predefs.h -I/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/mkspecs/linux-g++ -I/home/ubuntu/Qt5.14.2/Qt_Examples/IoTQtClient -I/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/include -I/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets -I/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/include/QtGui -I/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/include/QtNetwork -I/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/include/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../IoTQtClient/tab4sensordisplay.h -o moc_tab4sensordisplay.cpp
+	/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/bin/moc $(DEFINES) --include /home/ubuntu/Qt5.14.2/Qt_Examples/build-IoTQtClient-Desktop_Qt_5_14_2_GCC_64bit-Debug/moc_predefs.h -I/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/mkspecs/linux-g++ -I/home/ubuntu/Qt5.14.2/Qt_Examples/IoTQtClient -I/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/include -I/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/include/QtCharts -I/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets -I/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/include/QtGui -I/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/include/QtNetwork -I/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/include/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../IoTQtClient/tab4sensordisplay.h -o moc_tab4sensordisplay.cpp
+
+moc_tab5chartplot.cpp: ../IoTQtClient/tab5chartplot.h \
+		../../5.14.2/gcc_64/include/QtWidgets/QWidget \
+		../../5.14.2/gcc_64/include/QtWidgets/qwidget.h \
+		../../5.14.2/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
+		../../5.14.2/gcc_64/include/QtGui/qtguiglobal.h \
+		../../5.14.2/gcc_64/include/QtCore/qglobal.h \
+		../../5.14.2/gcc_64/include/QtCore/qconfig-bootstrapped.h \
+		../../5.14.2/gcc_64/include/QtCore/qconfig.h \
+		../../5.14.2/gcc_64/include/QtCore/qtcore-config.h \
+		../../5.14.2/gcc_64/include/QtCore/qsystemdetection.h \
+		../../5.14.2/gcc_64/include/QtCore/qprocessordetection.h \
+		../../5.14.2/gcc_64/include/QtCore/qcompilerdetection.h \
+		../../5.14.2/gcc_64/include/QtCore/qtypeinfo.h \
+		../../5.14.2/gcc_64/include/QtCore/qsysinfo.h \
+		../../5.14.2/gcc_64/include/QtCore/qlogging.h \
+		../../5.14.2/gcc_64/include/QtCore/qflags.h \
+		../../5.14.2/gcc_64/include/QtCore/qatomic.h \
+		../../5.14.2/gcc_64/include/QtCore/qbasicatomic.h \
+		../../5.14.2/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		../../5.14.2/gcc_64/include/QtCore/qgenericatomic.h \
+		../../5.14.2/gcc_64/include/QtCore/qatomic_cxx11.h \
+		../../5.14.2/gcc_64/include/QtCore/qatomic_msvc.h \
+		../../5.14.2/gcc_64/include/QtCore/qglobalstatic.h \
+		../../5.14.2/gcc_64/include/QtCore/qmutex.h \
+		../../5.14.2/gcc_64/include/QtCore/qnumeric.h \
+		../../5.14.2/gcc_64/include/QtCore/qversiontagging.h \
+		../../5.14.2/gcc_64/include/QtGui/qtgui-config.h \
+		../../5.14.2/gcc_64/include/QtWidgets/qtwidgets-config.h \
+		../../5.14.2/gcc_64/include/QtGui/qwindowdefs.h \
+		../../5.14.2/gcc_64/include/QtCore/qobjectdefs.h \
+		../../5.14.2/gcc_64/include/QtCore/qnamespace.h \
+		../../5.14.2/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		../../5.14.2/gcc_64/include/QtGui/qwindowdefs_win.h \
+		../../5.14.2/gcc_64/include/QtCore/qobject.h \
+		../../5.14.2/gcc_64/include/QtCore/qstring.h \
+		../../5.14.2/gcc_64/include/QtCore/qchar.h \
+		../../5.14.2/gcc_64/include/QtCore/qbytearray.h \
+		../../5.14.2/gcc_64/include/QtCore/qrefcount.h \
+		../../5.14.2/gcc_64/include/QtCore/qarraydata.h \
+		../../5.14.2/gcc_64/include/QtCore/qstringliteral.h \
+		../../5.14.2/gcc_64/include/QtCore/qstringalgorithms.h \
+		../../5.14.2/gcc_64/include/QtCore/qstringview.h \
+		../../5.14.2/gcc_64/include/QtCore/qstringbuilder.h \
+		../../5.14.2/gcc_64/include/QtCore/qlist.h \
+		../../5.14.2/gcc_64/include/QtCore/qalgorithms.h \
+		../../5.14.2/gcc_64/include/QtCore/qiterator.h \
+		../../5.14.2/gcc_64/include/QtCore/qhashfunctions.h \
+		../../5.14.2/gcc_64/include/QtCore/qpair.h \
+		../../5.14.2/gcc_64/include/QtCore/qvector.h \
+		../../5.14.2/gcc_64/include/QtCore/qcontainertools_impl.h \
+		../../5.14.2/gcc_64/include/QtCore/qpoint.h \
+		../../5.14.2/gcc_64/include/QtCore/qbytearraylist.h \
+		../../5.14.2/gcc_64/include/QtCore/qstringlist.h \
+		../../5.14.2/gcc_64/include/QtCore/qregexp.h \
+		../../5.14.2/gcc_64/include/QtCore/qstringmatcher.h \
+		../../5.14.2/gcc_64/include/QtCore/qcoreevent.h \
+		../../5.14.2/gcc_64/include/QtCore/qscopedpointer.h \
+		../../5.14.2/gcc_64/include/QtCore/qmetatype.h \
+		../../5.14.2/gcc_64/include/QtCore/qvarlengtharray.h \
+		../../5.14.2/gcc_64/include/QtCore/qcontainerfwd.h \
+		../../5.14.2/gcc_64/include/QtCore/qobject_impl.h \
+		../../5.14.2/gcc_64/include/QtCore/qmargins.h \
+		../../5.14.2/gcc_64/include/QtGui/qpaintdevice.h \
+		../../5.14.2/gcc_64/include/QtCore/qrect.h \
+		../../5.14.2/gcc_64/include/QtCore/qsize.h \
+		../../5.14.2/gcc_64/include/QtGui/qpalette.h \
+		../../5.14.2/gcc_64/include/QtGui/qcolor.h \
+		../../5.14.2/gcc_64/include/QtGui/qrgb.h \
+		../../5.14.2/gcc_64/include/QtGui/qrgba64.h \
+		../../5.14.2/gcc_64/include/QtGui/qbrush.h \
+		../../5.14.2/gcc_64/include/QtGui/qmatrix.h \
+		../../5.14.2/gcc_64/include/QtGui/qpolygon.h \
+		../../5.14.2/gcc_64/include/QtGui/qregion.h \
+		../../5.14.2/gcc_64/include/QtCore/qdatastream.h \
+		../../5.14.2/gcc_64/include/QtCore/qiodevice.h \
+		../../5.14.2/gcc_64/include/QtCore/qline.h \
+		../../5.14.2/gcc_64/include/QtGui/qtransform.h \
+		../../5.14.2/gcc_64/include/QtGui/qpainterpath.h \
+		../../5.14.2/gcc_64/include/QtGui/qimage.h \
+		../../5.14.2/gcc_64/include/QtGui/qpixelformat.h \
+		../../5.14.2/gcc_64/include/QtGui/qpixmap.h \
+		../../5.14.2/gcc_64/include/QtCore/qsharedpointer.h \
+		../../5.14.2/gcc_64/include/QtCore/qshareddata.h \
+		../../5.14.2/gcc_64/include/QtCore/qhash.h \
+		../../5.14.2/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		../../5.14.2/gcc_64/include/QtGui/qfont.h \
+		../../5.14.2/gcc_64/include/QtGui/qfontmetrics.h \
+		../../5.14.2/gcc_64/include/QtGui/qfontinfo.h \
+		../../5.14.2/gcc_64/include/QtWidgets/qsizepolicy.h \
+		../../5.14.2/gcc_64/include/QtGui/qcursor.h \
+		../../5.14.2/gcc_64/include/QtGui/qkeysequence.h \
+		../../5.14.2/gcc_64/include/QtGui/qevent.h \
+		../../5.14.2/gcc_64/include/QtCore/qvariant.h \
+		../../5.14.2/gcc_64/include/QtCore/qmap.h \
+		../../5.14.2/gcc_64/include/QtCore/qdebug.h \
+		../../5.14.2/gcc_64/include/QtCore/qtextstream.h \
+		../../5.14.2/gcc_64/include/QtCore/qlocale.h \
+		../../5.14.2/gcc_64/include/QtCore/qset.h \
+		../../5.14.2/gcc_64/include/QtCore/qcontiguouscache.h \
+		../../5.14.2/gcc_64/include/QtCore/qurl.h \
+		../../5.14.2/gcc_64/include/QtCore/qurlquery.h \
+		../../5.14.2/gcc_64/include/QtCore/qfile.h \
+		../../5.14.2/gcc_64/include/QtCore/qfiledevice.h \
+		../../5.14.2/gcc_64/include/QtGui/qvector2d.h \
+		../../5.14.2/gcc_64/include/QtGui/qtouchdevice.h \
+		../../5.14.2/gcc_64/include/QtCharts/QChartView \
+		../../5.14.2/gcc_64/include/QtCharts/qchartview.h \
+		../../5.14.2/gcc_64/include/QtCharts/QAbstractAxis \
+		../../5.14.2/gcc_64/include/QtCharts/qabstractaxis.h \
+		../../5.14.2/gcc_64/include/QtCharts/QChartGlobal \
+		../../5.14.2/gcc_64/include/QtCharts/qchartglobal.h \
+		../../5.14.2/gcc_64/include/QtCore/QtGlobal \
+		../../5.14.2/gcc_64/include/QtGui/QPen \
+		../../5.14.2/gcc_64/include/QtGui/qpen.h \
+		../../5.14.2/gcc_64/include/QtGui/QFont \
+		../../5.14.2/gcc_64/include/QtCore/QVariant \
+		../../5.14.2/gcc_64/include/QtCharts/QAbstractSeries \
+		../../5.14.2/gcc_64/include/QtCharts/qabstractseries.h \
+		../../5.14.2/gcc_64/include/QtCore/QObject \
+		../../5.14.2/gcc_64/include/QtCharts/QChart \
+		../../5.14.2/gcc_64/include/QtCharts/qchart.h \
+		../../5.14.2/gcc_64/include/QtCharts/QLegend \
+		../../5.14.2/gcc_64/include/QtCharts/qlegend.h \
+		../../5.14.2/gcc_64/include/QtWidgets/QGraphicsWidget \
+		../../5.14.2/gcc_64/include/QtWidgets/qgraphicswidget.h \
+		../../5.14.2/gcc_64/include/QtWidgets/qgraphicslayoutitem.h \
+		../../5.14.2/gcc_64/include/QtWidgets/qgraphicsitem.h \
+		../../5.14.2/gcc_64/include/QtGui/QBrush \
+		../../5.14.2/gcc_64/include/QtCore/QMargins \
+		../../5.14.2/gcc_64/include/QtWidgets/QGraphicsView \
+		../../5.14.2/gcc_64/include/QtWidgets/qgraphicsview.h \
+		../../5.14.2/gcc_64/include/QtGui/qpainter.h \
+		../../5.14.2/gcc_64/include/QtGui/qtextoption.h \
+		../../5.14.2/gcc_64/include/QtWidgets/qscrollarea.h \
+		../../5.14.2/gcc_64/include/QtWidgets/qabstractscrollarea.h \
+		../../5.14.2/gcc_64/include/QtWidgets/qframe.h \
+		../../5.14.2/gcc_64/include/QtWidgets/qgraphicsscene.h \
+		../../5.14.2/gcc_64/include/QtCharts/QLineSeries \
+		../../5.14.2/gcc_64/include/QtCharts/qlineseries.h \
+		../../5.14.2/gcc_64/include/QtCharts/QXYSeries \
+		../../5.14.2/gcc_64/include/QtCharts/qxyseries.h \
+		moc_predefs.h \
+		../../5.14.2/gcc_64/bin/moc
+	/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/bin/moc $(DEFINES) --include /home/ubuntu/Qt5.14.2/Qt_Examples/build-IoTQtClient-Desktop_Qt_5_14_2_GCC_64bit-Debug/moc_predefs.h -I/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/mkspecs/linux-g++ -I/home/ubuntu/Qt5.14.2/Qt_Examples/IoTQtClient -I/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/include -I/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/include/QtCharts -I/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/include/QtWidgets -I/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/include/QtGui -I/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/include/QtNetwork -I/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/include/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../IoTQtClient/tab5chartplot.h -o moc_tab5chartplot.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_mainwidget.h ui_tab2socketclient.h ui_tab3controlpannel.h ui_tab4sensordisplay.h
+compiler_uic_make_all: ui_mainwidget.h ui_tab2socketclient.h ui_tab3controlpannel.h ui_tab4sensordisplay.h ui_tab5chartplot.h
 compiler_uic_clean:
-	-$(DEL_FILE) ui_mainwidget.h ui_tab2socketclient.h ui_tab3controlpannel.h ui_tab4sensordisplay.h
+	-$(DEL_FILE) ui_mainwidget.h ui_tab2socketclient.h ui_tab3controlpannel.h ui_tab4sensordisplay.h ui_tab5chartplot.h
 ui_mainwidget.h: ../IoTQtClient/mainwidget.ui \
 		../../5.14.2/gcc_64/bin/uic
 	/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/bin/uic ../IoTQtClient/mainwidget.ui -o ui_mainwidget.h
@@ -1432,6 +1638,10 @@ ui_tab3controlpannel.h: ../IoTQtClient/tab3controlpannel.ui \
 ui_tab4sensordisplay.h: ../IoTQtClient/tab4sensordisplay.ui \
 		../../5.14.2/gcc_64/bin/uic
 	/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/bin/uic ../IoTQtClient/tab4sensordisplay.ui -o ui_tab4sensordisplay.h
+
+ui_tab5chartplot.h: ../IoTQtClient/tab5chartplot.ui \
+		../../5.14.2/gcc_64/bin/uic
+	/home/ubuntu/Qt5.14.2/5.14.2/gcc_64/bin/uic ../IoTQtClient/tab5chartplot.ui -o ui_tab5chartplot.h
 
 compiler_yacc_decl_make_all:
 compiler_yacc_decl_clean:
@@ -1573,6 +1783,40 @@ main.o: ../IoTQtClient/main.cpp ../IoTQtClient/mainwidget.h \
 		../../5.14.2/gcc_64/include/QtCore/QDebug \
 		../IoTQtClient/tab3controlpannel.h \
 		../IoTQtClient/tab4sensordisplay.h \
+		../IoTQtClient/tab5chartplot.h \
+		../../5.14.2/gcc_64/include/QtCharts/QChartView \
+		../../5.14.2/gcc_64/include/QtCharts/qchartview.h \
+		../../5.14.2/gcc_64/include/QtCharts/QAbstractAxis \
+		../../5.14.2/gcc_64/include/QtCharts/qabstractaxis.h \
+		../../5.14.2/gcc_64/include/QtCharts/QChartGlobal \
+		../../5.14.2/gcc_64/include/QtCharts/qchartglobal.h \
+		../../5.14.2/gcc_64/include/QtCore/QtGlobal \
+		../../5.14.2/gcc_64/include/QtGui/QPen \
+		../../5.14.2/gcc_64/include/QtGui/QFont \
+		../../5.14.2/gcc_64/include/QtCore/QVariant \
+		../../5.14.2/gcc_64/include/QtCharts/QAbstractSeries \
+		../../5.14.2/gcc_64/include/QtCharts/qabstractseries.h \
+		../../5.14.2/gcc_64/include/QtCore/QObject \
+		../../5.14.2/gcc_64/include/QtCharts/QChart \
+		../../5.14.2/gcc_64/include/QtCharts/qchart.h \
+		../../5.14.2/gcc_64/include/QtCharts/QLegend \
+		../../5.14.2/gcc_64/include/QtCharts/qlegend.h \
+		../../5.14.2/gcc_64/include/QtWidgets/QGraphicsWidget \
+		../../5.14.2/gcc_64/include/QtWidgets/qgraphicswidget.h \
+		../../5.14.2/gcc_64/include/QtWidgets/qgraphicslayoutitem.h \
+		../../5.14.2/gcc_64/include/QtWidgets/qgraphicsitem.h \
+		../../5.14.2/gcc_64/include/QtGui/QBrush \
+		../../5.14.2/gcc_64/include/QtCore/QMargins \
+		../../5.14.2/gcc_64/include/QtWidgets/QGraphicsView \
+		../../5.14.2/gcc_64/include/QtWidgets/qgraphicsview.h \
+		../../5.14.2/gcc_64/include/QtGui/qpainter.h \
+		../../5.14.2/gcc_64/include/QtWidgets/qscrollarea.h \
+		../../5.14.2/gcc_64/include/QtWidgets/qabstractscrollarea.h \
+		../../5.14.2/gcc_64/include/QtWidgets/qgraphicsscene.h \
+		../../5.14.2/gcc_64/include/QtCharts/QLineSeries \
+		../../5.14.2/gcc_64/include/QtCharts/qlineseries.h \
+		../../5.14.2/gcc_64/include/QtCharts/QXYSeries \
+		../../5.14.2/gcc_64/include/QtCharts/qxyseries.h \
 		../../5.14.2/gcc_64/include/QtWidgets/QApplication \
 		../../5.14.2/gcc_64/include/QtWidgets/qapplication.h \
 		../../5.14.2/gcc_64/include/QtCore/qcoreapplication.h \
@@ -1712,23 +1956,41 @@ mainwidget.o: ../IoTQtClient/mainwidget.cpp ../IoTQtClient/mainwidget.h \
 		../../5.14.2/gcc_64/include/QtCore/QDebug \
 		../IoTQtClient/tab3controlpannel.h \
 		../IoTQtClient/tab4sensordisplay.h \
-		ui_mainwidget.h \
+		../IoTQtClient/tab5chartplot.h \
+		../../5.14.2/gcc_64/include/QtCharts/QChartView \
+		../../5.14.2/gcc_64/include/QtCharts/qchartview.h \
+		../../5.14.2/gcc_64/include/QtCharts/QAbstractAxis \
+		../../5.14.2/gcc_64/include/QtCharts/qabstractaxis.h \
+		../../5.14.2/gcc_64/include/QtCharts/QChartGlobal \
+		../../5.14.2/gcc_64/include/QtCharts/qchartglobal.h \
+		../../5.14.2/gcc_64/include/QtCore/QtGlobal \
+		../../5.14.2/gcc_64/include/QtGui/QPen \
+		../../5.14.2/gcc_64/include/QtGui/QFont \
 		../../5.14.2/gcc_64/include/QtCore/QVariant \
-		../../5.14.2/gcc_64/include/QtWidgets/QApplication \
-		../../5.14.2/gcc_64/include/QtWidgets/qapplication.h \
-		../../5.14.2/gcc_64/include/QtCore/qcoreapplication.h \
-		../../5.14.2/gcc_64/include/QtCore/qeventloop.h \
-		../../5.14.2/gcc_64/include/QtWidgets/qdesktopwidget.h \
-		../../5.14.2/gcc_64/include/QtGui/qguiapplication.h \
-		../../5.14.2/gcc_64/include/QtGui/qinputmethod.h \
-		../../5.14.2/gcc_64/include/QtWidgets/QTabWidget \
-		../../5.14.2/gcc_64/include/QtWidgets/qtabwidget.h \
-		../../5.14.2/gcc_64/include/QtGui/qicon.h \
-		../../5.14.2/gcc_64/include/QtWidgets/QVBoxLayout \
-		../../5.14.2/gcc_64/include/QtWidgets/qboxlayout.h \
-		../../5.14.2/gcc_64/include/QtWidgets/qlayout.h \
-		../../5.14.2/gcc_64/include/QtWidgets/qlayoutitem.h \
-		../../5.14.2/gcc_64/include/QtWidgets/qgridlayout.h
+		../../5.14.2/gcc_64/include/QtCharts/QAbstractSeries \
+		../../5.14.2/gcc_64/include/QtCharts/qabstractseries.h \
+		../../5.14.2/gcc_64/include/QtCore/QObject \
+		../../5.14.2/gcc_64/include/QtCharts/QChart \
+		../../5.14.2/gcc_64/include/QtCharts/qchart.h \
+		../../5.14.2/gcc_64/include/QtCharts/QLegend \
+		../../5.14.2/gcc_64/include/QtCharts/qlegend.h \
+		../../5.14.2/gcc_64/include/QtWidgets/QGraphicsWidget \
+		../../5.14.2/gcc_64/include/QtWidgets/qgraphicswidget.h \
+		../../5.14.2/gcc_64/include/QtWidgets/qgraphicslayoutitem.h \
+		../../5.14.2/gcc_64/include/QtWidgets/qgraphicsitem.h \
+		../../5.14.2/gcc_64/include/QtGui/QBrush \
+		../../5.14.2/gcc_64/include/QtCore/QMargins \
+		../../5.14.2/gcc_64/include/QtWidgets/QGraphicsView \
+		../../5.14.2/gcc_64/include/QtWidgets/qgraphicsview.h \
+		../../5.14.2/gcc_64/include/QtGui/qpainter.h \
+		../../5.14.2/gcc_64/include/QtWidgets/qscrollarea.h \
+		../../5.14.2/gcc_64/include/QtWidgets/qabstractscrollarea.h \
+		../../5.14.2/gcc_64/include/QtWidgets/qgraphicsscene.h \
+		../../5.14.2/gcc_64/include/QtCharts/QLineSeries \
+		../../5.14.2/gcc_64/include/QtCharts/qlineseries.h \
+		../../5.14.2/gcc_64/include/QtCharts/QXYSeries \
+		../../5.14.2/gcc_64/include/QtCharts/qxyseries.h \
+		ui_mainwidget.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwidget.o ../IoTQtClient/mainwidget.cpp
 
 socketclient.o: ../IoTQtClient/socketclient.cpp ../../5.14.2/gcc_64/include/QtCore/QDebug \
@@ -1983,32 +2245,7 @@ tab2socketclient.o: ../IoTQtClient/tab2socketclient.cpp ../IoTQtClient/tab2socke
 		../../5.14.2/gcc_64/include/QtCore/QTime \
 		../../5.14.2/gcc_64/include/QtCore/qdatetime.h \
 		../../5.14.2/gcc_64/include/QtCore/QDebug \
-		ui_tab2socketclient.h \
-		../../5.14.2/gcc_64/include/QtCore/QVariant \
-		../../5.14.2/gcc_64/include/QtWidgets/QApplication \
-		../../5.14.2/gcc_64/include/QtWidgets/qapplication.h \
-		../../5.14.2/gcc_64/include/QtCore/qcoreapplication.h \
-		../../5.14.2/gcc_64/include/QtCore/qeventloop.h \
-		../../5.14.2/gcc_64/include/QtWidgets/qdesktopwidget.h \
-		../../5.14.2/gcc_64/include/QtGui/qguiapplication.h \
-		../../5.14.2/gcc_64/include/QtGui/qinputmethod.h \
-		../../5.14.2/gcc_64/include/QtWidgets/QHBoxLayout \
-		../../5.14.2/gcc_64/include/QtWidgets/qboxlayout.h \
-		../../5.14.2/gcc_64/include/QtWidgets/qlayout.h \
-		../../5.14.2/gcc_64/include/QtWidgets/qlayoutitem.h \
-		../../5.14.2/gcc_64/include/QtWidgets/qgridlayout.h \
-		../../5.14.2/gcc_64/include/QtWidgets/QLabel \
-		../../5.14.2/gcc_64/include/QtWidgets/qlabel.h \
-		../../5.14.2/gcc_64/include/QtWidgets/QLineEdit \
-		../../5.14.2/gcc_64/include/QtWidgets/QPushButton \
-		../../5.14.2/gcc_64/include/QtWidgets/qpushbutton.h \
-		../../5.14.2/gcc_64/include/QtWidgets/qabstractbutton.h \
-		../../5.14.2/gcc_64/include/QtGui/qicon.h \
-		../../5.14.2/gcc_64/include/QtWidgets/QTextEdit \
-		../../5.14.2/gcc_64/include/QtWidgets/qtextedit.h \
-		../../5.14.2/gcc_64/include/QtWidgets/qabstractscrollarea.h \
-		../../5.14.2/gcc_64/include/QtGui/qtextdocument.h \
-		../../5.14.2/gcc_64/include/QtWidgets/QVBoxLayout
+		ui_tab2socketclient.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o tab2socketclient.o ../IoTQtClient/tab2socketclient.cpp
 
 tab3controlpannel.o: ../IoTQtClient/tab3controlpannel.cpp ../IoTQtClient/tab3controlpannel.h \
@@ -2119,31 +2356,8 @@ tab3controlpannel.o: ../IoTQtClient/tab3controlpannel.cpp ../IoTQtClient/tab3con
 		../../5.14.2/gcc_64/include/QtWidgets/QMessageBox \
 		../../5.14.2/gcc_64/include/QtWidgets/qmessagebox.h \
 		../../5.14.2/gcc_64/include/QtWidgets/qdialog.h \
-		ui_tab3controlpannel.h \
-		../../5.14.2/gcc_64/include/QtCore/QVariant \
-		../../5.14.2/gcc_64/include/QtGui/QIcon \
-		../../5.14.2/gcc_64/include/QtGui/qicon.h \
-		../../5.14.2/gcc_64/include/QtWidgets/QApplication \
-		../../5.14.2/gcc_64/include/QtWidgets/qapplication.h \
-		../../5.14.2/gcc_64/include/QtCore/qcoreapplication.h \
-		../../5.14.2/gcc_64/include/QtCore/qeventloop.h \
-		../../5.14.2/gcc_64/include/QtWidgets/qdesktopwidget.h \
-		../../5.14.2/gcc_64/include/QtGui/qguiapplication.h \
-		../../5.14.2/gcc_64/include/QtGui/qinputmethod.h \
-		../../5.14.2/gcc_64/include/QtWidgets/QGridLayout \
-		../../5.14.2/gcc_64/include/QtWidgets/qgridlayout.h \
-		../../5.14.2/gcc_64/include/QtWidgets/qlayout.h \
-		../../5.14.2/gcc_64/include/QtWidgets/qlayoutitem.h \
-		../../5.14.2/gcc_64/include/QtWidgets/qboxlayout.h \
-		../../5.14.2/gcc_64/include/QtWidgets/QLabel \
-		../../5.14.2/gcc_64/include/QtWidgets/qlabel.h \
-		../../5.14.2/gcc_64/include/QtWidgets/qframe.h \
-		../../5.14.2/gcc_64/include/QtWidgets/QPushButton \
-		../../5.14.2/gcc_64/include/QtWidgets/qpushbutton.h \
-		../../5.14.2/gcc_64/include/QtWidgets/qabstractbutton.h \
-		../../5.14.2/gcc_64/include/QtWidgets/QScrollArea \
-		../../5.14.2/gcc_64/include/QtWidgets/qscrollarea.h \
-		../../5.14.2/gcc_64/include/QtWidgets/qabstractscrollarea.h
+		../../5.14.2/gcc_64/include/QtCore/QDebug \
+		ui_tab3controlpannel.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o tab3controlpannel.o ../IoTQtClient/tab3controlpannel.cpp
 
 tab4sensordisplay.o: ../IoTQtClient/tab4sensordisplay.cpp ../IoTQtClient/tab4sensordisplay.h \
@@ -2251,8 +2465,172 @@ tab4sensordisplay.o: ../IoTQtClient/tab4sensordisplay.cpp ../IoTQtClient/tab4sen
 		../../5.14.2/gcc_64/include/QtCore/qfiledevice.h \
 		../../5.14.2/gcc_64/include/QtGui/qvector2d.h \
 		../../5.14.2/gcc_64/include/QtGui/qtouchdevice.h \
+		../../5.14.2/gcc_64/include/QtCore/QDebug \
+		../IoTQtClient/socketclient.h \
+		../../5.14.2/gcc_64/include/QtNetwork/QTcpSocket \
+		../../5.14.2/gcc_64/include/QtNetwork/qtcpsocket.h \
+		../../5.14.2/gcc_64/include/QtNetwork/qtnetworkglobal.h \
+		../../5.14.2/gcc_64/include/QtNetwork/qtnetwork-config.h \
+		../../5.14.2/gcc_64/include/QtNetwork/qabstractsocket.h \
+		../../5.14.2/gcc_64/include/QtNetwork/QHostAddress \
+		../../5.14.2/gcc_64/include/QtNetwork/qhostaddress.h \
+		../../5.14.2/gcc_64/include/QtWidgets/QInputDialog \
+		../../5.14.2/gcc_64/include/QtWidgets/qinputdialog.h \
+		../../5.14.2/gcc_64/include/QtWidgets/qlineedit.h \
+		../../5.14.2/gcc_64/include/QtWidgets/qframe.h \
+		../../5.14.2/gcc_64/include/QtGui/qtextcursor.h \
+		../../5.14.2/gcc_64/include/QtGui/qtextformat.h \
+		../../5.14.2/gcc_64/include/QtGui/qpen.h \
+		../../5.14.2/gcc_64/include/QtGui/qtextoption.h \
+		../../5.14.2/gcc_64/include/QtWidgets/qdialog.h \
+		../../5.14.2/gcc_64/include/QtWidgets/QMessageBox \
+		../../5.14.2/gcc_64/include/QtWidgets/qmessagebox.h \
 		ui_tab4sensordisplay.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o tab4sensordisplay.o ../IoTQtClient/tab4sensordisplay.cpp
+
+tab5chartplot.o: ../IoTQtClient/tab5chartplot.cpp ../IoTQtClient/tab5chartplot.h \
+		../../5.14.2/gcc_64/include/QtWidgets/QWidget \
+		../../5.14.2/gcc_64/include/QtWidgets/qwidget.h \
+		../../5.14.2/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
+		../../5.14.2/gcc_64/include/QtGui/qtguiglobal.h \
+		../../5.14.2/gcc_64/include/QtCore/qglobal.h \
+		../../5.14.2/gcc_64/include/QtCore/qconfig-bootstrapped.h \
+		../../5.14.2/gcc_64/include/QtCore/qconfig.h \
+		../../5.14.2/gcc_64/include/QtCore/qtcore-config.h \
+		../../5.14.2/gcc_64/include/QtCore/qsystemdetection.h \
+		../../5.14.2/gcc_64/include/QtCore/qprocessordetection.h \
+		../../5.14.2/gcc_64/include/QtCore/qcompilerdetection.h \
+		../../5.14.2/gcc_64/include/QtCore/qtypeinfo.h \
+		../../5.14.2/gcc_64/include/QtCore/qsysinfo.h \
+		../../5.14.2/gcc_64/include/QtCore/qlogging.h \
+		../../5.14.2/gcc_64/include/QtCore/qflags.h \
+		../../5.14.2/gcc_64/include/QtCore/qatomic.h \
+		../../5.14.2/gcc_64/include/QtCore/qbasicatomic.h \
+		../../5.14.2/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		../../5.14.2/gcc_64/include/QtCore/qgenericatomic.h \
+		../../5.14.2/gcc_64/include/QtCore/qatomic_cxx11.h \
+		../../5.14.2/gcc_64/include/QtCore/qatomic_msvc.h \
+		../../5.14.2/gcc_64/include/QtCore/qglobalstatic.h \
+		../../5.14.2/gcc_64/include/QtCore/qmutex.h \
+		../../5.14.2/gcc_64/include/QtCore/qnumeric.h \
+		../../5.14.2/gcc_64/include/QtCore/qversiontagging.h \
+		../../5.14.2/gcc_64/include/QtGui/qtgui-config.h \
+		../../5.14.2/gcc_64/include/QtWidgets/qtwidgets-config.h \
+		../../5.14.2/gcc_64/include/QtGui/qwindowdefs.h \
+		../../5.14.2/gcc_64/include/QtCore/qobjectdefs.h \
+		../../5.14.2/gcc_64/include/QtCore/qnamespace.h \
+		../../5.14.2/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		../../5.14.2/gcc_64/include/QtGui/qwindowdefs_win.h \
+		../../5.14.2/gcc_64/include/QtCore/qobject.h \
+		../../5.14.2/gcc_64/include/QtCore/qstring.h \
+		../../5.14.2/gcc_64/include/QtCore/qchar.h \
+		../../5.14.2/gcc_64/include/QtCore/qbytearray.h \
+		../../5.14.2/gcc_64/include/QtCore/qrefcount.h \
+		../../5.14.2/gcc_64/include/QtCore/qarraydata.h \
+		../../5.14.2/gcc_64/include/QtCore/qstringliteral.h \
+		../../5.14.2/gcc_64/include/QtCore/qstringalgorithms.h \
+		../../5.14.2/gcc_64/include/QtCore/qstringview.h \
+		../../5.14.2/gcc_64/include/QtCore/qstringbuilder.h \
+		../../5.14.2/gcc_64/include/QtCore/qlist.h \
+		../../5.14.2/gcc_64/include/QtCore/qalgorithms.h \
+		../../5.14.2/gcc_64/include/QtCore/qiterator.h \
+		../../5.14.2/gcc_64/include/QtCore/qhashfunctions.h \
+		../../5.14.2/gcc_64/include/QtCore/qpair.h \
+		../../5.14.2/gcc_64/include/QtCore/qvector.h \
+		../../5.14.2/gcc_64/include/QtCore/qcontainertools_impl.h \
+		../../5.14.2/gcc_64/include/QtCore/qpoint.h \
+		../../5.14.2/gcc_64/include/QtCore/qbytearraylist.h \
+		../../5.14.2/gcc_64/include/QtCore/qstringlist.h \
+		../../5.14.2/gcc_64/include/QtCore/qregexp.h \
+		../../5.14.2/gcc_64/include/QtCore/qstringmatcher.h \
+		../../5.14.2/gcc_64/include/QtCore/qcoreevent.h \
+		../../5.14.2/gcc_64/include/QtCore/qscopedpointer.h \
+		../../5.14.2/gcc_64/include/QtCore/qmetatype.h \
+		../../5.14.2/gcc_64/include/QtCore/qvarlengtharray.h \
+		../../5.14.2/gcc_64/include/QtCore/qcontainerfwd.h \
+		../../5.14.2/gcc_64/include/QtCore/qobject_impl.h \
+		../../5.14.2/gcc_64/include/QtCore/qmargins.h \
+		../../5.14.2/gcc_64/include/QtGui/qpaintdevice.h \
+		../../5.14.2/gcc_64/include/QtCore/qrect.h \
+		../../5.14.2/gcc_64/include/QtCore/qsize.h \
+		../../5.14.2/gcc_64/include/QtGui/qpalette.h \
+		../../5.14.2/gcc_64/include/QtGui/qcolor.h \
+		../../5.14.2/gcc_64/include/QtGui/qrgb.h \
+		../../5.14.2/gcc_64/include/QtGui/qrgba64.h \
+		../../5.14.2/gcc_64/include/QtGui/qbrush.h \
+		../../5.14.2/gcc_64/include/QtGui/qmatrix.h \
+		../../5.14.2/gcc_64/include/QtGui/qpolygon.h \
+		../../5.14.2/gcc_64/include/QtGui/qregion.h \
+		../../5.14.2/gcc_64/include/QtCore/qdatastream.h \
+		../../5.14.2/gcc_64/include/QtCore/qiodevice.h \
+		../../5.14.2/gcc_64/include/QtCore/qline.h \
+		../../5.14.2/gcc_64/include/QtGui/qtransform.h \
+		../../5.14.2/gcc_64/include/QtGui/qpainterpath.h \
+		../../5.14.2/gcc_64/include/QtGui/qimage.h \
+		../../5.14.2/gcc_64/include/QtGui/qpixelformat.h \
+		../../5.14.2/gcc_64/include/QtGui/qpixmap.h \
+		../../5.14.2/gcc_64/include/QtCore/qsharedpointer.h \
+		../../5.14.2/gcc_64/include/QtCore/qshareddata.h \
+		../../5.14.2/gcc_64/include/QtCore/qhash.h \
+		../../5.14.2/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		../../5.14.2/gcc_64/include/QtGui/qfont.h \
+		../../5.14.2/gcc_64/include/QtGui/qfontmetrics.h \
+		../../5.14.2/gcc_64/include/QtGui/qfontinfo.h \
+		../../5.14.2/gcc_64/include/QtWidgets/qsizepolicy.h \
+		../../5.14.2/gcc_64/include/QtGui/qcursor.h \
+		../../5.14.2/gcc_64/include/QtGui/qkeysequence.h \
+		../../5.14.2/gcc_64/include/QtGui/qevent.h \
+		../../5.14.2/gcc_64/include/QtCore/qvariant.h \
+		../../5.14.2/gcc_64/include/QtCore/qmap.h \
+		../../5.14.2/gcc_64/include/QtCore/qdebug.h \
+		../../5.14.2/gcc_64/include/QtCore/qtextstream.h \
+		../../5.14.2/gcc_64/include/QtCore/qlocale.h \
+		../../5.14.2/gcc_64/include/QtCore/qset.h \
+		../../5.14.2/gcc_64/include/QtCore/qcontiguouscache.h \
+		../../5.14.2/gcc_64/include/QtCore/qurl.h \
+		../../5.14.2/gcc_64/include/QtCore/qurlquery.h \
+		../../5.14.2/gcc_64/include/QtCore/qfile.h \
+		../../5.14.2/gcc_64/include/QtCore/qfiledevice.h \
+		../../5.14.2/gcc_64/include/QtGui/qvector2d.h \
+		../../5.14.2/gcc_64/include/QtGui/qtouchdevice.h \
+		../../5.14.2/gcc_64/include/QtCharts/QChartView \
+		../../5.14.2/gcc_64/include/QtCharts/qchartview.h \
+		../../5.14.2/gcc_64/include/QtCharts/QAbstractAxis \
+		../../5.14.2/gcc_64/include/QtCharts/qabstractaxis.h \
+		../../5.14.2/gcc_64/include/QtCharts/QChartGlobal \
+		../../5.14.2/gcc_64/include/QtCharts/qchartglobal.h \
+		../../5.14.2/gcc_64/include/QtCore/QtGlobal \
+		../../5.14.2/gcc_64/include/QtGui/QPen \
+		../../5.14.2/gcc_64/include/QtGui/qpen.h \
+		../../5.14.2/gcc_64/include/QtGui/QFont \
+		../../5.14.2/gcc_64/include/QtCore/QVariant \
+		../../5.14.2/gcc_64/include/QtCharts/QAbstractSeries \
+		../../5.14.2/gcc_64/include/QtCharts/qabstractseries.h \
+		../../5.14.2/gcc_64/include/QtCore/QObject \
+		../../5.14.2/gcc_64/include/QtCharts/QChart \
+		../../5.14.2/gcc_64/include/QtCharts/qchart.h \
+		../../5.14.2/gcc_64/include/QtCharts/QLegend \
+		../../5.14.2/gcc_64/include/QtCharts/qlegend.h \
+		../../5.14.2/gcc_64/include/QtWidgets/QGraphicsWidget \
+		../../5.14.2/gcc_64/include/QtWidgets/qgraphicswidget.h \
+		../../5.14.2/gcc_64/include/QtWidgets/qgraphicslayoutitem.h \
+		../../5.14.2/gcc_64/include/QtWidgets/qgraphicsitem.h \
+		../../5.14.2/gcc_64/include/QtGui/QBrush \
+		../../5.14.2/gcc_64/include/QtCore/QMargins \
+		../../5.14.2/gcc_64/include/QtWidgets/QGraphicsView \
+		../../5.14.2/gcc_64/include/QtWidgets/qgraphicsview.h \
+		../../5.14.2/gcc_64/include/QtGui/qpainter.h \
+		../../5.14.2/gcc_64/include/QtGui/qtextoption.h \
+		../../5.14.2/gcc_64/include/QtWidgets/qscrollarea.h \
+		../../5.14.2/gcc_64/include/QtWidgets/qabstractscrollarea.h \
+		../../5.14.2/gcc_64/include/QtWidgets/qframe.h \
+		../../5.14.2/gcc_64/include/QtWidgets/qgraphicsscene.h \
+		../../5.14.2/gcc_64/include/QtCharts/QLineSeries \
+		../../5.14.2/gcc_64/include/QtCharts/qlineseries.h \
+		../../5.14.2/gcc_64/include/QtCharts/QXYSeries \
+		../../5.14.2/gcc_64/include/QtCharts/qxyseries.h \
+		ui_tab5chartplot.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o tab5chartplot.o ../IoTQtClient/tab5chartplot.cpp
 
 qrc_IoTQtClient.o: qrc_IoTQtClient.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_IoTQtClient.o qrc_IoTQtClient.cpp
@@ -2271,6 +2649,9 @@ moc_tab3controlpannel.o: moc_tab3controlpannel.cpp
 
 moc_tab4sensordisplay.o: moc_tab4sensordisplay.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_tab4sensordisplay.o moc_tab4sensordisplay.cpp
+
+moc_tab5chartplot.o: moc_tab5chartplot.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_tab5chartplot.o moc_tab5chartplot.cpp
 
 ####### Install
 

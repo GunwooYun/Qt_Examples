@@ -15,7 +15,9 @@ Tab4SensorDisplay::~Tab4SensorDisplay()
 }
 
 void Tab4SensorDisplay::slotTab4RecvData(QString recvData){
-    if(recvData.indexOf("New") > 0){}
+    if(recvData.indexOf("New") > 0){
+
+    }
     else{
         recvData.replace("[", "@");
         recvData.replace("]", "@");
