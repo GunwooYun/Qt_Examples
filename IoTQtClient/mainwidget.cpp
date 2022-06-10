@@ -21,11 +21,16 @@ MainWidget::MainWidget(QWidget *parent)
     pTab5ChartPlot = new Tab5ChartPlot(ui->pTab5);
     ui->pTab5->setLayout(pTab5ChartPlot->layout());
 
+    pTab6DataBase = new Tab6DataBase(ui->pTab6);
+    ui->pTab6->setLayout(pTab6DataBase->layout());
+
 
     connect(pTab3ControlPannel, SIGNAL(sigSocketSendData(QString)), pTab2SocketClient, SLOT(slotSocketSendData(QString)));
     connect(pTab2SocketClient, SIGNAL(sigTab3RecvData(QString)), pTab3ControlPannel, SLOT(slotTab3RecvData(QString)));
     connect(pTab2SocketClient, SIGNAL(sigTab4RecvData(QString)), pTab4SensorDisplay, SLOT(slotTab4RecvData(QString)));
     connect(pTab2SocketClient, SIGNAL(sigTab5RecvData(QString)), pTab5ChartPlot, SLOT(slotTab5RecvData(QString)));
+    connect(pTab2SocketClient, SIGNAL(sigTab6RecvData(QString)), pTab6DataBase, SLOT(slotTab6RecvData(QString)));
+
 }
 
 MainWidget::~MainWidget()

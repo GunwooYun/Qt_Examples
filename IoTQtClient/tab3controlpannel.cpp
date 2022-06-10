@@ -38,7 +38,7 @@ void Tab3ControlPannel::slotPlugOnOff(bool check){
 }
 
 void Tab3ControlPannel::slotTab3RecvData(QString recvData){
-    qDebug() << recvData;
+    //qDebug() << recvData;
     recvData.replace("[", "@");
     recvData.replace("]", "@");
     QStringList qlist = recvData.split("@"); // idx0:null, idx1:str, ...

@@ -40,13 +40,14 @@ void Tab2SocketClient::slotSocketRecvUpdate(QString strRecvData){
 
     QTime time = QTime::currentTime();
     QString strTime = time.toString();
-    qDebug() << strTime;
+    //qDebug() << strTime;
     strRecvData.chop(1);
     if(strRecvData.indexOf("LAMP") != -1 || strRecvData.indexOf("GAS") != -1){
         emit sigTab3RecvData(strRecvData);
     }
     else if(strRecvData.indexOf("SENSOR") != -1){
         emit sigTab5RecvData(strRecvData);
+        emit sigTab6RecvData(strRecvData);
     }
     strRecvData = strTime + " " + strRecvData;
 

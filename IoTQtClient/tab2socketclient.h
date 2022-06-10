@@ -33,6 +33,7 @@ signals:
     void sigTab3RecvData(QString);
     void sigTab4RecvData(QString);
     void sigTab5RecvData(QString);
+    void sigTab6RecvData(QString);
 
 
 

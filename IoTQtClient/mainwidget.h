@@ -6,6 +6,7 @@
 #include "tab3controlpannel.h"
 #include "tab4sensordisplay.h"
 #include "tab5chartplot.h"
+#include "tab6database.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWidget; }
@@ -25,5 +26,6 @@ private:
     Tab3ControlPannel* pTab3ControlPannel;
     Tab4SensorDisplay* pTab4SensorDisplay;
     Tab5ChartPlot * pTab5ChartPlot;
+    Tab6DataBase * pTab6DataBase;
 };
 #endif // MAINWIDGET_H
