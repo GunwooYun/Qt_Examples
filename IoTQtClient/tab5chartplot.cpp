@@ -7,6 +7,7 @@ Tab5ChartPlot::Tab5ChartPlot(QWidget *parent) :
 {
     ui->setupUi(this);
 
+
     /* Create line */
     pCdsLine = new QLineSeries(this); // cds
     pCdsLine->setName("CDS");
@@ -57,6 +58,9 @@ Tab5ChartPlot::Tab5ChartPlot(QWidget *parent) :
 
     /* Embed chart into form */
     ui->pChartHoriLayout->layout()->addWidget(chartView);
+
+
+
 
     /* QDateTimeAxis *axisX */
     axisX = new QDateTimeAxis;

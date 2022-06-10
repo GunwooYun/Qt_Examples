@@ -30,14 +30,14 @@ public:
     QDateTimeEdit *pDateTimeEditTo;
     QPushButton *pPBsearchButton;
     QPushButton *pPBdeleteButton;
-    QHBoxLayout *horizontalLayout_2;
+    QHBoxLayout *pTableChartHoriLayout;
     QTableWidget *pTableWidget;
 
     void setupUi(QWidget *Tab6DataBase)
     {
         if (Tab6DataBase->objectName().isEmpty())
             Tab6DataBase->setObjectName(QString::fromUtf8("Tab6DataBase"));
-        Tab6DataBase->resize(623, 452);
+        Tab6DataBase->resize(941, 452);
         verticalLayout = new QVBoxLayout(Tab6DataBase);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         horizontalLayout = new QHBoxLayout();
@@ -67,25 +67,33 @@ public:
 
         verticalLayout->addLayout(horizontalLayout);
 
-        horizontalLayout_2 = new QHBoxLayout();
-        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        pTableChartHoriLayout = new QHBoxLayout();
+        pTableChartHoriLayout->setObjectName(QString::fromUtf8("pTableChartHoriLayout"));
         pTableWidget = new QTableWidget(Tab6DataBase);
-        if (pTableWidget->columnCount() < 3)
-            pTableWidget->setColumnCount(3);
+        if (pTableWidget->columnCount() < 5)
+            pTableWidget->setColumnCount(5);
         QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
         pTableWidget->setHorizontalHeaderItem(0, __qtablewidgetitem);
         QTableWidgetItem *__qtablewidgetitem1 = new QTableWidgetItem();
         pTableWidget->setHorizontalHeaderItem(1, __qtablewidgetitem1);
         QTableWidgetItem *__qtablewidgetitem2 = new QTableWidgetItem();
         pTableWidget->setHorizontalHeaderItem(2, __qtablewidgetitem2);
+        QTableWidgetItem *__qtablewidgetitem3 = new QTableWidgetItem();
+        pTableWidget->setHorizontalHeaderItem(3, __qtablewidgetitem3);
+        QTableWidgetItem *__qtablewidgetitem4 = new QTableWidgetItem();
+        pTableWidget->setHorizontalHeaderItem(4, __qtablewidgetitem4);
         pTableWidget->setObjectName(QString::fromUtf8("pTableWidget"));
+        pTableWidget->horizontalHeader()->setCascadingSectionResizes(false);
+        pTableWidget->horizontalHeader()->setMinimumSectionSize(100);
         pTableWidget->horizontalHeader()->setDefaultSectionSize(110);
 
-        horizontalLayout_2->addWidget(pTableWidget);
+        pTableChartHoriLayout->addWidget(pTableWidget);
 
 
-        verticalLayout->addLayout(horizontalLayout_2);
+        verticalLayout->addLayout(pTableChartHoriLayout);
 
+        verticalLayout->setStretch(0, 1);
+        verticalLayout->setStretch(1, 9);
 
         retranslateUi(Tab6DataBase);
 
@@ -103,6 +111,10 @@ public:
         ___qtablewidgetitem1->setText(QCoreApplication::translate("Tab6DataBase", "date", nullptr));
         QTableWidgetItem *___qtablewidgetitem2 = pTableWidget->horizontalHeaderItem(2);
         ___qtablewidgetitem2->setText(QCoreApplication::translate("Tab6DataBase", "cds", nullptr));
+        QTableWidgetItem *___qtablewidgetitem3 = pTableWidget->horizontalHeaderItem(3);
+        ___qtablewidgetitem3->setText(QCoreApplication::translate("Tab6DataBase", "temp", nullptr));
+        QTableWidgetItem *___qtablewidgetitem4 = pTableWidget->horizontalHeaderItem(4);
+        ___qtablewidgetitem4->setText(QCoreApplication::translate("Tab6DataBase", "humi", nullptr));
     } // retranslateUi
 
 };
